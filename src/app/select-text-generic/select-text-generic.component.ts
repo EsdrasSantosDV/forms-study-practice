@@ -1,36 +1,37 @@
-import {Component, DestroyRef, forwardRef, inject, input, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from "@angular/forms";
-import { noop, tap} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
+import { Component, DestroyRef, forwardRef, inject, input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
+import { noop, tap } from 'rxjs';
+
 
 @Component({
-  selector: 'app-input-text-form-field-generic',
+  selector: 'app-select-text-generic',
   standalone: true,
-  imports: [ReactiveFormsModule, MatLabel, MatFormField, MatInput],
-  templateUrl: './input-text-form-field-generic.component.html',
-  styleUrl: './input-text-form-field-generic.component.scss',
+  imports: [],
+  templateUrl: './select-text-generic.component.html',
+  styleUrl: './select-text-generic.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputTextFormFieldGenericComponent),
+      useExisting: forwardRef(() => SelectTextGenericComponent),
       multi: true,
     },
   ],
 })
-export class InputTextFormFieldGenericComponent  implements ControlValueAccessor, OnInit {
+export class SelectTextGenericComponent {
   formBuilder=inject(FormBuilder);
 
   formControl=this.formBuilder.control<number | string | null>(null);
+
+
+
   
-  typeField=input.required<string>({
-    alias: 'typeField',
-  })
+
     
   label=input.required<string>({
     alias: 'label',
   })
+
 
   destroyRef: DestroyRef = inject(DestroyRef);
 
